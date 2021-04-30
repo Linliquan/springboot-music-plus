@@ -1,0 +1,12 @@
+HELP.md
+/logs/
+/target/
+/**/target/
+/**/resources/rebel.xml
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+*/target
+*.log
