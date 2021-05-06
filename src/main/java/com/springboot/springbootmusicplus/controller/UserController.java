@@ -1,5 +1,6 @@
 package com.springboot.springbootmusicplus.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.springboot.springbootmusicplus.entity.User;
 import com.springboot.springbootmusicplus.service.impl.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +31,7 @@ public class UserController {
         List<User> list = new ArrayList<>();
         list.add(user);
         list.forEach(System.out::println);
-        log.info("user:{}",  user);
+        log.info("user信息: {}", JSON.toJSONString(user));
         return "Hello world！";
     }
 }
