@@ -6,6 +6,8 @@ import com.springboot.springbootmusicplus.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author linliquan
  * @description:
@@ -20,5 +22,9 @@ public class UserService implements IUserService {
     @Override
     public User getUserInfoByUserId(Integer id) {
         return userOperator.getUserInfoByUserId(id);
+    }
+
+    public List<User> getUserInfoByUserName(String userName) {
+        return userOperator.getUserInfoByUserName(userName);
     }
 }

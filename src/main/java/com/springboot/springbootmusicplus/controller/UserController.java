@@ -31,26 +31,19 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserMapper userMapper;
-
-    @Autowired
-    UserOperator userOperator;
-
     @GetMapping("/hello")
     @ApiOperation(value = "打印hello", httpMethod = "GET")
     public String sayHello() {
         System.out.println("Hello world！");
-        User user = userService.getUserInfoByUserId(10);
+        User user = userService.getUserInfoByUserId(3333);
         List<User> list = new ArrayList<>();
         list.add(user);
         list.forEach(System.out::println);
         log.info("user信息: {}", JSON.toJSONString(user));
-        List<User> users = userMapper.selectList(null);
-        log.info("userList: {}", JSON.toJSONString(users));
 
-        List<User> userList = userOperator.getUserList();
-        log.info("users: {}", JSON.toJSONString(userList));
+        List<User> userList = userService.getUserInfoByUserName("101");
+        log.info("userList: {}", JSON.toJSONString(userList));
+
         return "Hello world！";
     }
 }
