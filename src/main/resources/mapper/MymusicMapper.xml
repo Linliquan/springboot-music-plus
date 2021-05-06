@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.springbootmusicplus.dao.repository.MymusicMapper">
+  <resultMap id="BaseResultMap" type="com.springboot.springbootmusicplus.entity.Mymusic">
+    <id column="my_id" jdbcType="INTEGER" property="myId" />
+    <result column="my_songName" jdbcType="VARCHAR" property="mySongname" />
+    <result column="my_singer" jdbcType="VARCHAR" property="mySinger" />
+    <result column="my_songLink" jdbcType="VARCHAR" property="mySonglink" />
+    <result column="my_lyricLink" jdbcType="VARCHAR" property="myLyriclink" />
+    <result column="my_photoLink" jdbcType="VARCHAR" property="myPhotolink" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    my_id, my_songName, my_singer, my_songLink, my_lyricLink, my_photoLink, user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mymusic
+    where my_id = #{myId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mymusic
+    where my_id = #{myId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.springbootmusicplus.entity.Mymusic">
+    insert into mymusic (my_id, my_songName, my_singer, 
+      my_songLink, my_lyricLink, my_photoLink, 
+      user_id)
+    values (#{myId,jdbcType=INTEGER}, #{mySongname,jdbcType=VARCHAR}, #{mySinger,jdbcType=VARCHAR}, 
+      #{mySonglink,jdbcType=VARCHAR}, #{myLyriclink,jdbcType=VARCHAR}, #{myPhotolink,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.springbootmusicplus.entity.Mymusic">
+    insert into mymusic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="myId != null">
+        my_id,
+      </if>
+      <if test="mySongname != null">
+        my_songName,
+      </if>
+      <if test="mySinger != null">
+        my_singer,
+      </if>
+      <if test="mySonglink != null">
+        my_songLink,
+      </if>
+      <if test="myLyriclink != null">
+        my_lyricLink,
+      </if>
+      <if test="myPhotolink != null">
+        my_photoLink,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="myId != null">
+        #{myId,jdbcType=INTEGER},
+      </if>
+      <if test="mySongname != null">
+        #{mySongname,jdbcType=VARCHAR},
+      </if>
+      <if test="mySinger != null">
+        #{mySinger,jdbcType=VARCHAR},
+      </if>
+      <if test="mySonglink != null">
+        #{mySonglink,jdbcType=VARCHAR},
+      </if>
+      <if test="myLyriclink != null">
+        #{myLyriclink,jdbcType=VARCHAR},
+      </if>
+      <if test="myPhotolink != null">
+        #{myPhotolink,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.springbootmusicplus.entity.Mymusic">
+    update mymusic
+    <set>
+      <if test="mySongname != null">
+        my_songName = #{mySongname,jdbcType=VARCHAR},
+      </if>
+      <if test="mySinger != null">
+        my_singer = #{mySinger,jdbcType=VARCHAR},
+      </if>
+      <if test="mySonglink != null">
+        my_songLink = #{mySonglink,jdbcType=VARCHAR},
+      </if>
+      <if test="myLyriclink != null">
+        my_lyricLink = #{myLyriclink,jdbcType=VARCHAR},
+      </if>
+      <if test="myPhotolink != null">
+        my_photoLink = #{myPhotolink,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where my_id = #{myId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.springbootmusicplus.entity.Mymusic">
+    update mymusic
+    set my_songName = #{mySongname,jdbcType=VARCHAR},
+      my_singer = #{mySinger,jdbcType=VARCHAR},
+      my_songLink = #{mySonglink,jdbcType=VARCHAR},
+      my_lyricLink = #{myLyriclink,jdbcType=VARCHAR},
+      my_photoLink = #{myPhotolink,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER}
+    where my_id = #{myId,jdbcType=INTEGER}
+  </update>
+</mapper>

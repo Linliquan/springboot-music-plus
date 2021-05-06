@@ -1,11 +1,9 @@
 package com.springboot.springbootmusicplus.dao.operator;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.springboot.springbootmusicplus.dao.repository.UserMapper;
 import com.springboot.springbootmusicplus.entity.User;
 import org.apache.commons.collections.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -35,7 +35,7 @@ public class UserController {
     @ApiOperation(value = "打印hello", httpMethod = "GET")
     public String sayHello() {
         System.out.println("Hello world！");
-        User user = userService.getUserInfoByUserId(3333);
+        User user = userService.getUserInfoByUserId(7);
         List<User> list = new ArrayList<>();
         list.add(user);
         list.forEach(System.out::println);

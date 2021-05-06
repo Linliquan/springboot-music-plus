@@ -61,5 +61,15 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false" selectByExampleQueryId="false"/>
 
+<!--        <table tableName="mymusic"-->
+<!--               enableCountByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               enableUpdateByExample="false" selectByExampleQueryId="false"/>-->
+
+<!--        <table tableName="musiclink"-->
+<!--               enableCountByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               enableUpdateByExample="false" selectByExampleQueryId="false"/>-->
+
     </context>
 </generatorConfiguration>
