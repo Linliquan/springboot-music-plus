@@ -18,6 +18,8 @@
         <mybatis.baomidou.version>3.3.0</mybatis.baomidou.version>
         <apache-commons-lang3-version>3.7</apache-commons-lang3-version>
         <apache-commons-collections-version>3.2.2</apache-commons-collections-version>
+        <apache-commons-codec-version>1.14</apache-commons-codec-version>
+        <apache-commons-lang-version>2.6</apache-commons-lang-version>
     </properties>
     <dependencies>
         <dependency>
@@ -98,6 +100,18 @@
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
             <version>${apache-commons-collections-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${apache-commons-codec-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${apache-commons-lang-version}</version>
         </dependency>
 
     </dependencies>
