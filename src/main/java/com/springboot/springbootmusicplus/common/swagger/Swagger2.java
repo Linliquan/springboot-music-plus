@@ -60,7 +60,7 @@ public class Swagger2 {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("轻语音乐 API")
-                .description("轻语音乐 swagger地址：http://localhost:8088/swagger-ui.html")
+                .description("轻语音乐 swagger地址：http://localhost:8088/swagger-ui.html  主页地址：http://localhost:8088/index.html")
                 .termsOfServiceUrl("http://www.linliquan.top")
                 .version("1.0")
                 .build();
