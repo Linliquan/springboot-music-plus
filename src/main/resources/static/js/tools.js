@@ -45,8 +45,8 @@ function addToDB(url, data) {
         url: url,
         type: "post",
         data: data,
-        success: function (data) {//webspond
-            if (data.statusCode == "200") {
+        success: function (data) {//response
+            if (data.code == 200) {
                 window.location.href = "/index.html";
                 alert("注册成功，点击跳转主页");
                 //location.reload();

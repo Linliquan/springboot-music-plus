@@ -1,11 +1,8 @@
 package com.springboot.springbootmusicplus.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.springboot.springbootmusicplus.common.enums.FailEnums;
 import com.springboot.springbootmusicplus.common.response.Response;
 import com.springboot.springbootmusicplus.entity.User;
-import com.springboot.springbootmusicplus.model.request.SongRearchRequest;
-import com.springboot.springbootmusicplus.model.request.UserRegisterRequest;
 import com.springboot.springbootmusicplus.service.impl.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,19 +29,22 @@ public class UserController {
 
     @PostMapping("/userRegister")
     @ApiOperation(value = "用户注册", httpMethod = "POST")
-    public Response<Boolean> userRegister(@RequestBody UserRegisterRequest request) {
+    public Response<Boolean> userRegister(@RequestParam(required = false) String userName,
+                                          @RequestParam(required = false) String userPassword) {
 
-        List<User> userList = userService.getUserInfoByUserName(request.getUserName());
+        log.info("用户注册：用户名：{}, 用户密码：{}", userName ,userPassword);
+        List<User> userList = userService.getUserInfoByUserName(userName);
         if (CollectionUtils.isNotEmpty(userList)) {
             return Response.fail(FailEnums.EXISTS_ERROR.getCode(), "用户名已存在！");
         }
         User user = new User();
-        user.setUserName(request.getUserName());
-        user.setUserPassword(request.getUserPassword());
+        user.setUserName(userName);
+        user.setUserPassword(userPassword);
         boolean result = userService.insertUser(user);
         if (!result) {
             return Response.fail(FailEnums.DATA_ERROR.getCode(), "插入用户失败！");
         }
+        log.info("用户名：{}, 用户注册成功！", userName);
         return Response.succ(null, "用户注册成功！");
     }
 }
