@@ -27,4 +27,8 @@ public class UserService implements IUserService {
     public List<User> getUserInfoByUserName(String userName) {
         return userOperator.getUserInfoByUserName(userName);
     }
+
+    public boolean insertUser(User user) {
+        return userOperator.insertUser(user);
+    }
 }

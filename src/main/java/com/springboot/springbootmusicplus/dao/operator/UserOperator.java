@@ -20,6 +20,11 @@ public class UserOperator extends BaseOperator<UserMapper, User> {
     @Resource
     private UserMapper userMapper;
 
+    /**
+     * 根据 id 查询用户信息
+     * @param id
+     * @return
+     */
     public User getUserInfoByUserId(Integer id) {
         return userMapper.selectByPrimaryKey(id);
     }
@@ -35,6 +40,15 @@ public class UserOperator extends BaseOperator<UserMapper, User> {
         wrapper.eq(User::getUserName, userName);
         List<User> users = userMapper.selectList(wrapper);
         return CollectionUtils.isNotEmpty(users) ? users : null;
+    }
+
+    /**
+     * 插入用户信息
+     * @param user
+     * @return
+     */
+    public boolean insertUser(User user) {
+        return userMapper.insertSelective(user) > 0;
     }
 
 }
