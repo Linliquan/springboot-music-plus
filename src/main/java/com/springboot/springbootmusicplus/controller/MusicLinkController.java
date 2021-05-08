@@ -1,5 +1,6 @@
 package com.springboot.springbootmusicplus.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.springboot.springbootmusicplus.common.enums.FailEnums;
 import com.springboot.springbootmusicplus.common.response.Response;
 import com.springboot.springbootmusicplus.entity.Musiclink;
@@ -32,12 +33,13 @@ public class MusicLinkController {
 
     @PostMapping("/getSongRearch")
     @ApiOperation(value = "歌曲搜索功能", httpMethod = "POST")
-    public Response<List<Musiclink>> getSongRearch(@RequestBody SongRearchRequest request) {
-
-        List<Musiclink> musicList = musiclinkService.getMusiclinkInfoBySongName(request.getSongName());
+    public Response<List<Musiclink>> getSongRearch(@RequestParam(required = false) String songName) {
+        log.info("搜索的歌曲名：{}", songName);
+        List<Musiclink> musicList = musiclinkService.getMusiclinkInfoBySongName(songName);
         if (CollectionUtils.isEmpty(musicList)) {
             return Response.fail(FailEnums.NOT_EXISTS_ERROR.getCode(), "歌曲不存在！");
         }
+        log.info("搜索到的歌曲：{}", JSON.toJSONString(musicList));
         return Response.succ(musicList);
     }
 

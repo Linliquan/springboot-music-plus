@@ -90,7 +90,7 @@
             type: "POST",//post方式请求
             data: lll,//将数据通过lll在调用的时候传入
             success: function (data) {
-                if (data.statusCode == "200") {
+                if (data.code == 200) {
                     var search = document.getElementById("songName").value;//获取搜索框内的文本
                     $.cookie("song_search", search, {expires: 7, path: "/"});//将文本存入cookie
                     var str = '';
