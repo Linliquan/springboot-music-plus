@@ -463,7 +463,7 @@
         url: "musicLink/getSongRearch",
         type: "POST",
         success: function (data) {
-            if (data.statusCode == "200") {
+            if (data.code == 200) {
                 $(".jDian1").click(function () {//点击调用fn（）方法，并传入14，下方以此类推
                     fn(14);
                 });
@@ -540,7 +540,7 @@
             type: "POST",
             data: lll,
             success: function (data) {
-                if (data.statusCode == "200") {
+                if (data.code == 200) {
                     var search = document.getElementById("songName").value;
                     $.cookie("song_search", search, {expires: 7, path: "/"});
                     window.open("/musicSearchTest.html");
