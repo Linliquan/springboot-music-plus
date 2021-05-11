@@ -31,4 +31,8 @@ public class UserService implements IUserService {
     public boolean insertUser(User user) {
         return userOperator.insertUser(user);
     }
+
+    public User getUserInfo(String userName, String userPassword) {
+        return userOperator.getUserInfo(userName, userPassword);
+    }
 }

@@ -26,7 +26,7 @@
                 <h4 class="modal-title" id="myModalLabel">账号密码登录</h4>
             </div>
             <div class="modal-body" style="position: relative;">
-                <form id="test" class="form-horizontal" role="form" action="/user/loginPage" method="post"
+                <form id="test" class="form-horizontal" role="form" action="/user/userLogin" method="post"
                       style="padding-left: 50px;">
                     <div class="form-group">
                         <img src="images/logo2.png" style="display: block; padding: 20px 151px">
@@ -517,11 +517,11 @@
                 $("#user_number").html($.cookie("user_id"));
 
                 function fn(i) {//调用方法，更改cookie的信息，并跳转到播放页面
-                    console.log(data.data.list[i].mlId);
-                    $.cookie("songLink", data.data.list[i].mlSonglink, {expires: 7, path: "/"});
-                    $.cookie("songName", data.data.list[i].mlSongname, {expires: 7, path: "/"});
-                    $.cookie("songSinger", data.data.list[i].mlSinger, {expires: 7, path: "/"});
-                    $.cookie("songPhoto", data.data.list[i].mlPhotolink, {expires: 7, path: "/"});
+                    console.log(data.data[i].mlId);
+                    $.cookie("songLink", data.data[i].mlSonglink, {expires: 7, path: "/"});
+                    $.cookie("songName", data.data[i].mlSongname, {expires: 7, path: "/"});
+                    $.cookie("songSinger", data.data[i].mlSinger, {expires: 7, path: "/"});
+                    $.cookie("songPhoto", data.data[i].mlPhotolink, {expires: 7, path: "/"});
                     window.open("/QQmusic.html");
                 }
             }
@@ -546,10 +546,10 @@
                     window.open("/musicSearchTest.html");
                     var str = '';
                     /* data.data.list.length对应respon.map.list.length */
-                    for (var i = 0; i < data.data.list.length; i++) {
+                    for (var i = 0; i < data.data.length; i++) {
                         str += '<tr>'
-                            + '<td>' + data.data.list[i].mlSongname + '</td>'
-                            + '<td>' + data.data.list[i].mlSinger + '</td>'
+                            + '<td>' + data.data[i].mlSongname + '</td>'
+                            + '<td>' + data.data[i].mlSinger + '</td>'
                             /* + '<td>' + data.data.list[i].ml_songLink + '</td>' */
                             + '</tr>';
                     }

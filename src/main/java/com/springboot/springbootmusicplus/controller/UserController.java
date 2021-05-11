@@ -1,8 +1,11 @@
 package com.springboot.springbootmusicplus.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.springboot.springbootmusicplus.common.enums.FailEnums;
 import com.springboot.springbootmusicplus.common.response.Response;
+import com.springboot.springbootmusicplus.common.utils.UUIDUtil;
 import com.springboot.springbootmusicplus.entity.User;
+import com.springboot.springbootmusicplus.model.response.UserLoginResModel;
 import com.springboot.springbootmusicplus.service.impl.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,6 +14,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -46,5 +50,27 @@ public class UserController {
         }
         log.info("用户名：{}, 用户注册成功！", userName);
         return Response.succ(null, "用户注册成功！");
+    }
+
+    @PostMapping("/userLogin")
+    @ApiOperation(value = "用户登录", httpMethod = "POST")
+    public Response<UserLoginResModel> userLogin(HttpServletRequest request) {
+
+        // 取参数的方法，对应登录表单中的用户名name="user_name"
+        String userName = request.getParameter("user_name");
+        String userPassword = request.getParameter("user_password");
+        log.info("用户注册：用户名：{}, 用户密码：{}", userName, userPassword);
+
+        User user = userService.getUserInfo(userName, userPassword);
+        if (user == null) {
+            return Response.fail(FailEnums.NOT_EXISTS_ERROR.getCode(), "用户名或密码错误！");
+        }
+        UserLoginResModel userLoginResModel = new UserLoginResModel();
+        userLoginResModel.setUserId(user.getUserId());
+        userLoginResModel.setUserName(user.getUserName());
+        // 生成token
+        userLoginResModel.setToken(UUIDUtil.getUUID());
+        log.info("用户名：{} 登录成功！, msg:{}", userName, JSON.toJSONString(userLoginResModel));
+        return Response.succ(userLoginResModel, "登录成功！");
     }
 }

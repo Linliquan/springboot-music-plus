@@ -51,4 +51,18 @@ public class UserOperator extends BaseOperator<UserMapper, User> {
         return userMapper.insertSelective(user) > 0;
     }
 
+    /**
+     * 根据用户名和密码查询用户信息
+     * @param userName
+     * @param userPassword
+     * @return
+     */
+    public User getUserInfo(String userName, String userPassword) {
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(User::getUserName, userName);
+        wrapper.eq(User::getUserPassword, userPassword);
+        List<User> list = userMapper.selectList(wrapper);
+        return CollectionUtils.isNotEmpty(list) ? list.get(0) : null;
+    }
+
 }

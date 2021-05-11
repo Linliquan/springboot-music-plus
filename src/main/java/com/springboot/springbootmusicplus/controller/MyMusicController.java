@@ -24,7 +24,7 @@ import java.util.List;
 public class MyMusicController {
 
     @PostMapping("/getMyMusicList")
-    @ApiOperation(value = "歌曲搜索功能", httpMethod = "POST")
+    @ApiOperation(value = "查询我的收藏歌曲", httpMethod = "POST")
     public Response<List<Musiclink>> getMyMusicList(@RequestParam(required = false) String songName) {
         return Response.succ(null);
     }
