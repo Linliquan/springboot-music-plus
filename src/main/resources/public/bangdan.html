@@ -280,10 +280,10 @@
 </div>
 <audio id="audio" src=""></audio>
 
-    <!--榜单下面的分页，有bug，点击后会导致收藏音乐重复跳出弹框，暂时不用分页功能！ -->
-<!--<div style="position: relative;bottom: 0;left: 50%;" class="col-sm-12">-->
-    <!--<ul id="pagintor"></ul>-->
-<!--</div>-->
+    <!--榜单下面的分页，有bug，点击后会导致收藏音乐重复跳出弹框，暂时不用分页功能！ 暂时启用 -->
+<div style="position: relative;bottom: 0;left: 50%;" class="col-sm-12">
+    <ul id="pagintor"></ul>
+</div>
 
 <script src="js/jquery.min.js?v=2.1.4"></script>
 <script src="js/bootstrap-paginator.min.js"></script>
@@ -304,7 +304,7 @@
             type: "POST",
             data: "pageNo=" + pageNo,
             success: function (data) {
-                if (data.statusCode == "200") {
+                if (data.code == 200) {
                     var str = '';
                     for (var i = 0; i < data.data.list.length; i++) {
                         var a = i + 1;
@@ -312,9 +312,9 @@
 
                         str += '<tr>'
                             + '<td class="number111"  style="padding: 14px;border-bottom: 1px solid #eee; width: 100px;text-align: center;">' + ((pageNo - 1) * 10 + a) + '</td>'
-                            + '<td  style="padding: 14px;border-bottom: 1px solid #eee;width: 600px;text-align: center;"><a class=sName' + i + ' href="#">' + data.data.list[i].ml_songName + '</a>' +
+                            + '<td  style="padding: 14px;border-bottom: 1px solid #eee;width: 600px;text-align: center;"><a class=sName' + i + ' href="#">' + data.data.list[i].mlSongname + '</a>' +
                             '<span class="glyphicon glyphicon-heart" id=sFav' + i + ' style="color: #eee;float: right;"></span></td>'
-                            + '<td style="padding: 14px;border-bottom: 1px solid #eee;width: 300px;text-align: center;"><a href="#">' + data.data.list[i].ml_singer + '</a></td>'
+                            + '<td style="padding: 14px;border-bottom: 1px solid #eee;width: 300px;text-align: center;"><a href="#">' + data.data.list[i].mlSinger + '</a></td>'
                             + '</tr>';
 
                         function dd(i) {
@@ -337,17 +337,17 @@
 
                     function fn(j) {
                         console.log(data.data.list[j].ml_id);
-                        $.cookie("song_link", data.data.list[j].ml_songLink, {expires: 7, path: "/"});
-                        $.cookie("song_name", data.data.list[j].ml_songName, {expires: 7, path: "/"});
-                        $.cookie("song_singer", data.data.list[j].ml_singer, {expires: 7, path: "/"});
-                        $.cookie("song_photo", data.data.list[j].ml_photoLink, {expires: 7, path: "/"});
+                        $.cookie("songLink", data.data.list[j].ml_songLink, {expires: 7, path: "/"});
+                        $.cookie("songName", data.data.list[j].ml_songName, {expires: 7, path: "/"});
+                        $.cookie("songSinger", data.data.list[j].ml_singer, {expires: 7, path: "/"});
+                        $.cookie("songPhoto", data.data.list[j].ml_photoLink, {expires: 7, path: "/"});
                         window.location.href = "/QQmusic.html";
                     }
 
                     function fn1(j) {
                         console.log(data.data.list[j].ml_id);
-                        $.cookie("song_id", data.data.list[j].ml_id, {expires: 7, path: "/"});
-                        $.cookie("song_name", data.data.list[j].ml_songName, {expires: 7, path: "/"});
+                        $.cookie("songId", data.data.list[j].ml_id, {expires: 7, path: "/"});
+                        $.cookie("songName", data.data.list[j].ml_songName, {expires: 7, path: "/"});
                     }
                 }
                 $("table tbody").html(str);
@@ -374,13 +374,13 @@
             url: "/musicLink/addMusicCollect",
             type: "post",
             data: {
-                "songName": $.cookie("song_name"),
-                "song_id": $.cookie("song_id"),
+                "songName": $.cookie("songName"),
+                "songId": $.cookie("songId"),
                 "user_name": $.cookie("user_name"),
                 "user_password": $.cookie("user_password"),
             },
             success: function (data) {//webspond
-                if (data.statusCode == "200") {
+                if (data.code == 200) {
 
                     // $('#sFav'+j).removeClass('glyphicon-heart');
                     $('#sFav' + j).css('color', '#ff69b4');

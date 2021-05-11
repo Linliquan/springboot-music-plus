@@ -278,7 +278,7 @@
                 "song_id": $.cookie("song_id"),
             },
             success: function (data) {
-                if (data.statusCode == "200") {
+                if (data.code == 200) {
                     var str = '';                                                   //动态生成表格
                     /* data.data.list.length对应respon.map.list.length */
                     for (var i = 0; i < data.data.list.length; i++) {
@@ -325,7 +325,7 @@
 
 
                     $("table tbody").html(str);
-                } else if (data.statusCode == "202") {//如果后台返回202则提示歌曲已收藏
+                } else if (data.code == "202") {//如果后台返回202则提示歌曲已收藏
                     alert("您还没有收藏歌曲哦，快去列表收藏吧！");
                 }
             },
@@ -345,7 +345,7 @@
                 "user_id": $.cookie("user_id"),//传入用户id
             },
             success: function (data) {//webspond
-                if (data.statusCode == "200") {
+                if (data.code == 200) {
                     window.location.reload();//刷新页面
                     alert("已成功从收藏列表移除");//提示删除成功
 

@@ -143,7 +143,7 @@
 
 
                     $("table tbody").html(str);
-                } else if (data.statusCode == "202") {
+                } else if (data.code == "202") {
                     alert("搜索不到歌曲！");
                 }
             },
@@ -166,7 +166,7 @@
                 "user_password": $.cookie("user_password"),
             },
             success: function (data) {//webspond
-                if (data.statusCode == "200") {
+                if (data.code == 200) {
                     $('#sFav' + j).css('color', '#ff69b4');
                     alert("歌曲收藏成功，请去我的音乐查看！")
 

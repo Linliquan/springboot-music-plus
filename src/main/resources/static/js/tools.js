@@ -73,7 +73,7 @@ function setPassWord(url, data) {                   //url和data为参数，在�
         type: "post",
         data: data,
         success: function (data) {
-            if (data.statusCode == "200") {
+            if (data.code == 200) {
                 window.location.href = "/index.html";// 跳转到指定页面
                 alert("修改密码成功，请重新登录！"); // 弹窗
             } else {
@@ -100,7 +100,7 @@ function denglu(url, data) {                                                 //u
         type: "post",
         data: data,                                                         //      下方为登录成功后实现的功能
         success: function (data) {
-            if (data.statusCode == "200") {
+            if (data.code == 200) {
                 $("#display1").attr("style", "display:none;");              //      隐藏按钮
                 $("#myModal").attr("style", "display:none;");               //      隐藏模态框
                 $(".modal-backdrop.fade").attr("style", "display:none;");   //      隐藏模态框背景颜色
