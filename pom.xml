@@ -20,6 +20,7 @@
         <apache-commons-collections-version>3.2.2</apache-commons-collections-version>
         <apache-commons-codec-version>1.14</apache-commons-codec-version>
         <apache-commons-lang-version>2.6</apache-commons-lang-version>
+        <pagehelper-boot-version>1.2.10</pagehelper-boot-version>
     </properties>
     <dependencies>
         <dependency>
@@ -112,6 +113,12 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>${apache-commons-lang-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper-boot-version}</version>
         </dependency>
 
     </dependencies>
