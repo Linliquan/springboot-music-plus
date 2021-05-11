@@ -95,14 +95,14 @@
                     $.cookie("song_search", search, {expires: 7, path: "/"});//将文本存入cookie
                     var str = '';
                     /* data.data.list.length对应respon.map.list.length */
-                    for (var i = 0; i < data.data.list.length; i++) {
+                    for (var i = 0; i < data.data.length; i++) {
                         var a = i + 1;
 
                         str += '<tr>'
                             + '<td class="number111"  style="padding: 14px;border-bottom: 1px solid #eee; width: 100px;text-align: center;">' + a + '</td>'
-                            + '<td  style="padding: 14px;border-bottom: 1px solid #eee;width: 600px;text-align: center;"><a class=sName' + i + ' href="#">' + data.data.list[i].mlSongname + '</a>' +
+                            + '<td  style="padding: 14px;border-bottom: 1px solid #eee;width: 600px;text-align: center;"><a class=sName' + i + ' href="#">' + data.data[i].mlSongname + '</a>' +
                             '<span class="glyphicon glyphicon-heart" id=sFav' + i + ' style="color: #eee;float: right;"></span></td>'
-                            + '<td style="padding: 14px;border-bottom: 1px solid #eee;width: 300px;text-align: center;"><a href="#">' + data.data.list[i].mlSinger + '</a></td>'
+                            + '<td style="padding: 14px;border-bottom: 1px solid #eee;width: 300px;text-align: center;"><a href="#">' + data.data[i].mlSinger + '</a></td>'
                             + '</tr>';
 
                         function play(i) {
@@ -126,18 +126,18 @@
                     }
 
                     function fn(j) {
-                        console.log(data.data.list[j].ml_id);
-                        $.cookie("songLink", data.data.list[j].mlSonglink, {expires: 7, path: "/"});
-                        $.cookie("songName", data.data.list[j].mlSongname, {expires: 7, path: "/"});
-                        $.cookie("songSinger", data.data.list[j].mlSinger, {expires: 7, path: "/"});
-                        $.cookie("songPhoto", data.data.list[j].mlPhotolink, {expires: 7, path: "/"});
+                        console.log(data.data[j].ml_id);
+                        $.cookie("songLink", data.data[j].mlSonglink, {expires: 7, path: "/"});
+                        $.cookie("songName", data.data[j].mlSongname, {expires: 7, path: "/"});
+                        $.cookie("songSinger", data.data[j].mlSinger, {expires: 7, path: "/"});
+                        $.cookie("songPhoto", data.data[j].mlPhotolink, {expires: 7, path: "/"});
                         window.location.href = "/QQmusic.html";
                     }
 
                     function fn1(j) {
-                        console.log(data.data.list[j].ml_id);
-                        $.cookie("songId", data.data.list[j].mlId, {expires: 7, path: "/"});
-                        $.cookie("songName", data.data.list[j].mlSongname, {expires: 7, path: "/"});
+                        console.log(data.data[j].ml_id);
+                        $.cookie("songId", data.data[j].mlId, {expires: 7, path: "/"});
+                        $.cookie("songName", data.data[j].mlSongname, {expires: 7, path: "/"});
                     }
 
 
