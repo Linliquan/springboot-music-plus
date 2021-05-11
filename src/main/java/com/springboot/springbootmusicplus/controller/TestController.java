@@ -1,11 +1,13 @@
 package com.springboot.springbootmusicplus.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.springboot.springbootmusicplus.common.beantools.Copier;
 import com.springboot.springbootmusicplus.entity.User;
 import com.springboot.springbootmusicplus.service.impl.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +41,13 @@ public class TestController {
 
         List<User> userList = userService.getUserInfoByUserName("101");
         log.info("userList: {}", JSON.toJSONString(userList));
+        User cUser = new User();
+        Copier.copy(user, cUser);
+        log.info("class copy Test, cUser: {}", JSON.toJSONString(cUser));
+
+        User sUser = new User();
+        BeanUtils.copyProperties(user, sUser);
+        log.info("spring copy Test, cUser: {}", JSON.toJSONString(cUser));
 
         return "Hello world！";
     }
