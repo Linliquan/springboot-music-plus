@@ -517,11 +517,11 @@
                 $("#user_number").html($.cookie("user_id"));
 
                 function fn(i) {//调用方法，更改cookie的信息，并跳转到播放页面
-                    console.log(data.data.list[i].ml_id);
-                    $.cookie("song_link", data.data.list[i].ml_songLink, {expires: 7, path: "/"});
-                    $.cookie("song_name", data.data.list[i].ml_songName, {expires: 7, path: "/"});
-                    $.cookie("song_singer", data.data.list[i].ml_singer, {expires: 7, path: "/"});
-                    $.cookie("song_photo", data.data.list[i].ml_photoLink, {expires: 7, path: "/"});
+                    console.log(data.data.list[i].mlId);
+                    $.cookie("songLink", data.data.list[i].mlSonglink, {expires: 7, path: "/"});
+                    $.cookie("songName", data.data.list[i].mlSongname, {expires: 7, path: "/"});
+                    $.cookie("songSinger", data.data.list[i].mlSinger, {expires: 7, path: "/"});
+                    $.cookie("songPhoto", data.data.list[i].mlPhotolink, {expires: 7, path: "/"});
                     window.open("/QQmusic.html");
                 }
             }
@@ -548,13 +548,13 @@
                     /* data.data.list.length对应respon.map.list.length */
                     for (var i = 0; i < data.data.list.length; i++) {
                         str += '<tr>'
-                            + '<td>' + data.data.list[i].ml_songName + '</td>'
-                            + '<td>' + data.data.list[i].ml_singer + '</td>'
+                            + '<td>' + data.data.list[i].mlSongname + '</td>'
+                            + '<td>' + data.data.list[i].mlSinger + '</td>'
                             /* + '<td>' + data.data.list[i].ml_songLink + '</td>' */
                             + '</tr>';
                     }
                     $("table tbody").html(str);
-                } else if (data.code == "202") {
+                } else if (data.code != 200) {
                     alert("搜索不到歌曲,请重新输入！");
                 }
             },

@@ -169,7 +169,7 @@
 
 
                     $("#sNamee").html(str);
-                } else if (data.code == "202") {
+                } else if (data.code != 200) {
                     alert("您还没有收藏歌曲哦，快去列表收藏吧！");
                 }
             },
