@@ -47,7 +47,7 @@ public class MusicLinkController {
     @PostMapping("/getMusicLinkList")
     @ApiOperation(value = "从数据库中获取歌曲数据，在榜单中显示", httpMethod = "POST")
     public Response<PageResponse<Musiclink>> getMusicLinkList(@RequestParam(defaultValue = "1", required = false) Integer pageNo,
-                                                                   @RequestParam(defaultValue = "30", required = false) Integer pageSize) {
+                                                                   @RequestParam(defaultValue = "10", required = false) Integer pageSize) {
 
         PageUtil.startPage(pageNo, pageSize);
         List<Musiclink> musicList = musiclinkService.getMusiclinkList();
