@@ -51,7 +51,7 @@ function addToDB(url, data) {
                 alert("注册成功，点击跳转主页");
                 //location.reload();
             } else {
-                alert("add error!" + data.statusMsg);
+                alert("注册失败，" + data.msg);
             }
         },
         error: function (data) {
@@ -77,7 +77,7 @@ function setPassWord(url, data) {                   //url和data为参数，在�
                 window.location.href = "/index.html";// 跳转到指定页面
                 alert("修改密码成功，请重新登录！"); // 弹窗
             } else {
-                alert("add error!" + data.statusMsg);
+                alert("修改密码失败，" + data.msg);
             }
             ;
         },
