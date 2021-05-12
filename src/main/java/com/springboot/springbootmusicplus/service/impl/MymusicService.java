@@ -29,6 +29,10 @@ public class MymusicService implements IMymusicService {
         return mymusicOperator.getMymusicInfoBySongNameAndUserId(songName, userId);
     }
 
+    public List<Mymusic> getMymusicInfoByUserId(Integer userId) {
+        return mymusicOperator.getMymusicInfoByUserId(userId);
+    }
+
     public boolean insertMusicInfo(Musiclink musiclink , Integer userId) {
         Mymusic mymusic = new Mymusic();
         mymusic.setMySongname(musiclink.getMlSongname());

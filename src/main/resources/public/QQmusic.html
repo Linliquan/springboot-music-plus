@@ -116,22 +116,23 @@
             url: "myMusic/getMyMusicList",
             type: "POST",
             data: {
-                "user_name": $.cookie("user_name"),
-                "user_password": $.cookie("user_password"),
-                "song_id": $.cookie("song_id"),
+                // "user_name": $.cookie("user_name"),
+                // "user_password": $.cookie("user_password"),
+                // "song_id": $.cookie("song_id"),
+                "userId": $.cookie("user_id"),
             },
             success: function (data) {
                 if (data.code == 200) {
                     var str = '';
                     /* data.data.list.length对应respon.map.list.length */
-                    for (var i = 0; i < data.data.list.length; i++) {
+                    for (var i = 0; i < data.data.length; i++) {
                         var a = i + 1;
                         str += '<li class="list_music">\n' +
                             '                        <div class="list_number">' + a + '</div>\n' +
-                            '                        <div id= sName' + i + ' class="list_name" style="cursor: pointer;">' + data.data.list[i].my_songName +
+                            '                        <div id= sName' + i + ' class="list_name" style="cursor: pointer;">' + data.data[i].mySongname +
                             '<span class="glyphicon glyphicon-trash" id=sFav' + i + ' style="color: rgba(255,255,255,0.5);float: right;margin-right: 20px;cursor: pointer;"></span>' +
                             '                        </div>\n' +
-                            '                        <div class="list_singer">' + data.data.list[i].my_singer + '</div>\n' +
+                            '                        <div class="list_singer">' + data.data[i].mySinger + '</div>\n' +
                             '                        <div class="list_time"><span class="time1">4:36</span>\n' +
                             '                    </li>';
 
@@ -154,17 +155,15 @@
                     }
 
                     function fn(j) {
-
-                        $.cookie("song_link", data.data.list[j].my_songLink, {expires: 7, path: "/"});
-                        $.cookie("song_name", data.data.list[j].my_songName, {expires: 7, path: "/"});
-                        $.cookie("song_singer", data.data.list[j].my_singer, {expires: 7, path: "/"});
-                        $.cookie("song_photo", data.data.list[j].my_photoLink, {expires: 7, path: "/"});
+                        $.cookie("songLink", data.data[j].mySonglink, {expires: 7, path: "/"});
+                        $.cookie("songName", data.data[j].mySongname, {expires: 7, path: "/"});
+                        $.cookie("songSinger", data.data[j].mySinger, {expires: 7, path: "/"});
+                        $.cookie("songPhoto", data.data[j].myPhotolink, {expires: 7, path: "/"});
                         window.location.href = "/QQmusic.html";
                     }
 
                     function fn1(j) {
-
-                        $.cookie("ml_id", data.data.list[j].my_id, {expires: 7, path: "/"});
+                        $.cookie("mlId", data.data[j].myId, {expires: 7, path: "/"});
                     }
 
 

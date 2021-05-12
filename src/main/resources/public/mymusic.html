@@ -273,23 +273,24 @@
             url: "myMusic/getMyMusicList",      //后台获取整个数据库方法的地址
             type: "POST",
             data: {
-                "user_name": $.cookie("user_name"),
-                "user_password": $.cookie("user_password"),
-                "song_id": $.cookie("song_id"),
+                // "user_name": $.cookie("user_name"),
+                // "user_password": $.cookie("user_password"),
+                // "song_id": $.cookie("song_id"),
+                "userId": $.cookie("user_id"),
             },
             success: function (data) {
                 if (data.code == 200) {
                     var str = '';                                                   //动态生成表格
                     /* data.data.list.length对应respon.map.list.length */
-                    for (var i = 0; i < data.data.list.length; i++) {
+                    for (var i = 0; i < data.data.length; i++) {
                         var a = i + 1;
 
 
                         str += '<tr>'
                             + '<td class="number111"  style="padding: 14px;border-bottom: 1px solid #eee; width: 100px;text-align: center;">' + a + '</td>'
-                            + '<td  style="padding: 14px;border-bottom: 1px solid #eee;width: 600px;text-align: center;"><a class=sName' + i + ' href="#">' + data.data.list[i].my_songName + '</a>' +
+                            + '<td  style="padding: 14px;border-bottom: 1px solid #eee;width: 600px;text-align: center;"><a class=sName' + i + ' href="#">' + data.data[i].mySongname + '</a>' +
                             '<span class="glyphicon glyphicon-trash" id=sFav' + i + ' style="color: #2c323b;float: right;"></span></td>'
-                            + '<td style="padding: 14px;border-bottom: 1px solid #eee;width: 300px;text-align: center;"><a href="#">' + data.data.list[i].my_singer + '</a></td>'
+                            + '<td style="padding: 14px;border-bottom: 1px solid #eee;width: 300px;text-align: center;"><a href="#">' + data.data[i].mySinger + '</a></td>'
                             + '</tr>';//将动态生成的表格添加到table标签中
 
                         function play(i) {
@@ -311,16 +312,16 @@
                     }
 
                     function fn(j) {//
-                        $.cookie("song_link", data.data.list[j].my_songLink, {expires: 7, path: "/"});//
-                        $.cookie("song_name", data.data.list[j].my_songName, {expires: 7, path: "/"});//   保存后台传入的相关信息和链接进入cookie，在播放页面直接将cookie的值调用出来，
-                        $.cookie("song_singer", data.data.list[j].my_singer, {expires: 7, path: "/"});//    然后替换原有的信息和播放路径，完成点击歌曲播放功能
-                        $.cookie("song_photo", data.data.list[j].my_photoLink, {expires: 7, path: "/"});//
+                        $.cookie("songLink", data.data[j].mySonglink, {expires: 7, path: "/"});
+                        $.cookie("songName", data.data[j].mySongname, {expires: 7, path: "/"}); //   保存后台传入的相关信息和链接进入cookie，在播放页面直接将cookie的值调用出来，
+                        $.cookie("songSinger", data.data[j].mySinger, {expires: 7, path: "/"}); //    然后替换原有的信息和播放路径，完成点击歌曲播放功能
+                        $.cookie("songPhoto", data.data[j].myPhotolink, {expires: 7, path: "/"});
                         window.location.href = "/QQmusic.html";//跳转页面
                     }
 
                     function fn1(j) {
 
-                        $.cookie("ml_id", data.data.list[j].my_id, {expires: 7, path: "/"});      //将歌曲id保存下来，点击删除按钮时，将值传入后台，删除数据库
+                        $.cookie("mlId", data.data[j].myId, {expires: 7, path: "/"});      //将歌曲id保存下来，点击删除按钮时，将值传入后台，删除数据库
                     }
 
 

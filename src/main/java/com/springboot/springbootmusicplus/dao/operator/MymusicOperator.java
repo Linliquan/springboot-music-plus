@@ -44,6 +44,18 @@ public class MymusicOperator extends BaseOperator<MymusicMapper, Mymusic> {
     }
 
     /**
+     * 根据 userId 查询收藏的歌曲
+     * @param userId
+     * @return
+     */
+    public List<Mymusic> getMymusicInfoByUserId(Integer userId) {
+        LambdaQueryWrapper<Mymusic> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Mymusic::getUserId, userId);
+        List<Mymusic> list = mymusicMapper.selectList(wrapper);
+        return CollectionUtils.isNotEmpty(list) ? list : null;
+    }
+
+    /**
      * 插入收藏的歌曲
      * @param mymusic
      * @return

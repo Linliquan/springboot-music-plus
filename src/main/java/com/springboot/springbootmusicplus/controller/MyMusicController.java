@@ -1,5 +1,6 @@
 package com.springboot.springbootmusicplus.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.springboot.springbootmusicplus.common.enums.FailEnums;
 import com.springboot.springbootmusicplus.common.page.PageResponse;
 import com.springboot.springbootmusicplus.common.response.Response;
@@ -38,8 +39,11 @@ public class MyMusicController {
 
     @PostMapping("/getMyMusicList")
     @ApiOperation(value = "查询我的收藏歌曲", httpMethod = "POST")
-    public Response<List<Musiclink>> getMyMusicList(@RequestParam(required = false) String songName) {
-        return Response.succ(null);
+    public Response<List<Mymusic>> getMyMusicList(@RequestParam(required = false) Integer userId) {
+        log.info("查询我的收藏歌曲请求：userId：{}", userId);
+        List<Mymusic> myMusicList = mymusicService.getMymusicInfoByUserId(userId);
+        log.info("查询我的收藏歌曲结果：myMusicList：{}", JSON.toJSONString(myMusicList));
+        return Response.succ(myMusicList);
     }
 
     @PostMapping("/addMusicCollect")
