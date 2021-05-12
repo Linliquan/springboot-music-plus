@@ -59,7 +59,7 @@ public class UserController {
         // 取参数的方法，对应登录表单中的用户名name="user_name"
         String userName = request.getParameter("user_name");
         String userPassword = request.getParameter("user_password");
-        log.info("用户注册：用户名：{}, 用户密码：{}", userName, userPassword);
+        log.info("用户登录：用户名：{}, 用户密码：{}", userName, userPassword);
 
         User user = userService.getUserInfo(userName, userPassword);
         if (user == null) {
