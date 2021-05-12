@@ -64,4 +64,17 @@ public class MymusicOperator extends BaseOperator<MymusicMapper, Mymusic> {
         return mymusicMapper.insertSelective(mymusic) > 0;
     }
 
+    /**
+     * 删除音乐
+     * @param myId
+     * @param userId
+     * @return
+     */
+    public boolean deleteMyMusic(Integer myId, Integer userId) {
+        LambdaQueryWrapper<Mymusic> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Mymusic::getMyId, myId);
+        wrapper.eq(Mymusic::getUserId, userId);
+        return mymusicMapper.delete(wrapper) > 0;
+    }
+
 }

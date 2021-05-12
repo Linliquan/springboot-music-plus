@@ -321,7 +321,7 @@
 
                     function fn1(j) {
 
-                        $.cookie("mlId", data.data[j].myId, {expires: 7, path: "/"});      //将歌曲id保存下来，点击删除按钮时，将值传入后台，删除数据库
+                        $.cookie("myId", data.data[j].myId, {expires: 7, path: "/"});      //将歌曲id保存下来，点击删除按钮时，将值传入后台，删除数据库
                     }
 
 
@@ -342,13 +342,13 @@
             url: "/myMusic/deleteMyMusic",//后台地址
             type: "post",//post请求方式
             data: {
-                "song_id": $.cookie("ml_id"),//传入歌曲id
-                "user_id": $.cookie("user_id"),//传入用户id
+                "myId": $.cookie("myId"),//传入歌曲id
+                "userId": $.cookie("user_id"),//传入用户id
             },
             success: function (data) {//webspond
                 if (data.code == 200) {
                     window.location.reload();//刷新页面
-                    alert("已成功从收藏列表移除");//提示删除成功
+                    alert("删除成功！");//提示删除成功
 
                     //location.reload();
                 } else {

@@ -163,7 +163,7 @@
                     }
 
                     function fn1(j) {
-                        $.cookie("mlId", data.data[j].myId, {expires: 7, path: "/"});
+                        $.cookie("myId", data.data[j].myId, {expires: 7, path: "/"});
                     }
 
 
@@ -184,13 +184,13 @@
             url: "/myMusic/deleteMyMusic",
             type: "post",
             data: {
-                "song_id": $.cookie("ml_id"),
-                "user_id": $.cookie("user_id"),
+                "myId": $.cookie("myId"),
+                "userId": $.cookie("user_id"),
             },
             success: function (data) {//webspond
                 if (data.code == 200) {
                     window.location.reload();
-                    alert("已成功从收藏列表移除");
+                    alert("删除成功！");
 
                     //location.reload();
                 } else {

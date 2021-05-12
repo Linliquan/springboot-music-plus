@@ -44,6 +44,10 @@ public class MymusicService implements IMymusicService {
         return mymusicOperator.insertMusicInfo(mymusic);
     }
 
+    public boolean deleteMyMusic(Integer myId, Integer userId) {
+        return mymusicOperator.deleteMyMusic(myId, userId);
+    }
+
 
 
 }
