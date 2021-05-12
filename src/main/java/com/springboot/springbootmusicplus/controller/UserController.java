@@ -1,6 +1,7 @@
 package com.springboot.springbootmusicplus.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.springboot.springbootmusicplus.common.beantools.Copier;
 import com.springboot.springbootmusicplus.common.enums.FailEnums;
 import com.springboot.springbootmusicplus.common.response.Response;
 import com.springboot.springbootmusicplus.common.utils.UUIDUtil;
@@ -66,8 +67,7 @@ public class UserController {
             return Response.fail(FailEnums.NOT_EXISTS_ERROR.getCode(), "用户名或密码错误！");
         }
         UserLoginResModel userLoginResModel = new UserLoginResModel();
-        userLoginResModel.setUserId(user.getUserId());
-        userLoginResModel.setUserName(user.getUserName());
+        Copier.copy(user, userLoginResModel);
         // 生成token
         userLoginResModel.setToken(UUIDUtil.getUUID());
         log.info("用户名：{} 登录成功！, msg:{}", userName, JSON.toJSONString(userLoginResModel));
