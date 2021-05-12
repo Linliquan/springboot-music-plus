@@ -31,6 +31,22 @@ public class MusicLinkController {
     @Autowired
     private MusiclinkService musiclinkService;
 
+    @PostMapping("/getMusicLinkList")
+    @ApiOperation(value = "从数据库中获取歌曲数据，在榜单中显示", httpMethod = "POST")
+    public Response<PageResponse<Musiclink>> getMusicLinkList(@RequestParam(defaultValue = "1", required = false) Integer pageNo,
+                                                              @RequestParam(defaultValue = "10", required = false) Integer pageSize) {
+
+        // 使用PageHelper分页插件
+        PageUtil.startPage(pageNo, pageSize);
+        List<Musiclink> musicList = musiclinkService.getMusiclinkList();
+        if (CollectionUtils.isEmpty(musicList)) {
+            return Response.fail(FailEnums.NOT_EXISTS_ERROR.getCode(), "查询榜单列表歌曲为空！");
+        }
+        log.info("查询榜单列表歌曲：{}", JSON.toJSONString(musicList));
+        PageResponse<Musiclink> pageResponse = PageUtil.convertPageData(musicList);
+        pageResponse.setList(musicList);
+        return Response.succ(pageResponse);
+    }
 
     @PostMapping("/getSongRearch")
     @ApiOperation(value = "歌曲搜索功能", httpMethod = "POST")
@@ -42,22 +58,6 @@ public class MusicLinkController {
         }
         log.info("搜索到的歌曲：{}", JSON.toJSONString(musicList));
         return Response.succ(musicList);
-    }
-
-    @PostMapping("/getMusicLinkList")
-    @ApiOperation(value = "从数据库中获取歌曲数据，在榜单中显示", httpMethod = "POST")
-    public Response<PageResponse<Musiclink>> getMusicLinkList(@RequestParam(defaultValue = "1", required = false) Integer pageNo,
-                                                                   @RequestParam(defaultValue = "10", required = false) Integer pageSize) {
-
-        PageUtil.startPage(pageNo, pageSize);
-        List<Musiclink> musicList = musiclinkService.getMusiclinkList();
-        if (CollectionUtils.isEmpty(musicList)) {
-            return Response.fail(FailEnums.NOT_EXISTS_ERROR.getCode(), "查询榜单列表歌曲为空！");
-        }
-        log.info("查询榜单列表歌曲：{}", JSON.toJSONString(musicList));
-        PageResponse<Musiclink> pageResponse = PageUtil.convertPageData(musicList);
-        pageResponse.setList(musicList);
-        return Response.succ(pageResponse);
     }
 
 }

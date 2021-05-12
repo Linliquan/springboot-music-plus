@@ -8,6 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpringbootMusicPlusApplication {
 
+    /**
+     * @author 林李权
+     */
     public static void main(String[] args) {
         SpringApplication.run(SpringbootMusicPlusApplication.class, args);
     }

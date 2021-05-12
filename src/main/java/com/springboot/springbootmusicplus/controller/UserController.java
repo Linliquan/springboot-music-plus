@@ -36,7 +36,7 @@ public class UserController {
     public Response<Boolean> userRegister(@RequestParam(required = false) String userName,
                                           @RequestParam(required = false) String userPassword) {
 
-        log.info("用户注册：用户名：{}, 用户密码：{}", userName ,userPassword);
+        log.info("用户注册：用户名：{}, 用户密码：{}", userName, userPassword);
         List<User> userList = userService.getUserInfoByUserName(userName);
         if (CollectionUtils.isNotEmpty(userList)) {
             return Response.fail(FailEnums.EXISTS_ERROR.getCode(), "用户名已存在！");
