@@ -100,7 +100,6 @@ function denglu(url, data) {                                                 //u
         type: "post",
         data: data,                                                         //      下方为登录成功后实现的功能
         success: function (data) {
-            window.alert(JSON.stringify(data.code))
             if (data.code == 200) {
                 $("#display1").attr("style", "display:none;");              //      隐藏按钮
                 $("#myModal").attr("style", "display:none;");               //      隐藏模态框
