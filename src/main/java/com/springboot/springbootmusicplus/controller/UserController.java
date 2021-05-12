@@ -73,4 +73,27 @@ public class UserController {
         log.info("用户名：{} 登录成功！, msg:{}", userName, JSON.toJSONString(userLoginResModel));
         return Response.succ(userLoginResModel, "登录成功！");
     }
+
+    @PostMapping("/resetUserPassword")
+    @ApiOperation(value = "修改密码", httpMethod = "POST")
+    public Response<UserLoginResModel> resetUserPassword(HttpServletRequest request) {
+
+        // 取参数的方法，对应登录表单中的用户名name="userName"
+        String userName = request.getParameter("userName");
+        String oldPassword = request.getParameter("oldPassword");
+        String newPassword = request.getParameter("newPassword");
+        log.info("修改密码请求：用户名：{}, 旧密码：{}， 新密码：{}", userName, oldPassword, newPassword);
+
+        User user = userService.getUserInfo(userName, oldPassword);
+        if (user == null) {
+            return Response.fail(FailEnums.NOT_EXISTS_ERROR.getCode(), "用户名或旧密码错误！");
+        }
+        // 修改用户密码
+        boolean updatePassword = userService.updatePassword(userName, newPassword);
+        if (!updatePassword) {
+            return Response.fail(FailEnums.DB_OPERATOR_ERROR.getCode(), "修改密码失败！");
+        }
+        log.info("用户名：{} 修改密码成功！, 新密码:{}", userName, newPassword);
+        return Response.succ(null, "修改密码成功！");
+    }
 }

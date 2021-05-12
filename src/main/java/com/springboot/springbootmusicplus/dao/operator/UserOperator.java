@@ -1,6 +1,7 @@
 package com.springboot.springbootmusicplus.dao.operator;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.springboot.springbootmusicplus.dao.repository.UserMapper;
 import com.springboot.springbootmusicplus.entity.User;
 import org.apache.commons.collections.CollectionUtils;
@@ -63,6 +64,19 @@ public class UserOperator extends BaseOperator<UserMapper, User> {
         wrapper.eq(User::getUserPassword, userPassword);
         List<User> list = userMapper.selectList(wrapper);
         return CollectionUtils.isNotEmpty(list) ? list.get(0) : null;
+    }
+
+    /**
+     * 更新用户密码
+     * @param userName
+     * @return
+     */
+    public boolean updatePassword(String userName, String newPassword) {
+        LambdaUpdateWrapper<User> wrapper = new LambdaUpdateWrapper<>();
+        wrapper.eq(User::getUserName, userName);
+        User user = new User();
+        user.setUserPassword(newPassword);
+        return userMapper.update(user, wrapper) > 0;
     }
 
 }

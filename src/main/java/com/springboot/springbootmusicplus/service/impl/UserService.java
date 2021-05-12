@@ -35,4 +35,8 @@ public class UserService implements IUserService {
     public User getUserInfo(String userName, String userPassword) {
         return userOperator.getUserInfo(userName, userPassword);
     }
+
+    public boolean updatePassword(String userName, String newPassword) {
+        return userOperator.updatePassword(userName, newPassword);
+    }
 }
