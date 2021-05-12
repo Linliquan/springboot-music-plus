@@ -64,12 +64,13 @@ $(function () {
     // }
 
     //下方为调用关键代码
-    $("#audio").attr({'src':$.cookie("song_link")});//将cookie存入的播放路径调用出来传给播放标签
-    $(".music_progress_name").text($.cookie("song_name")+" / "+$.cookie("song_singer"));//将cookie存入的歌名歌手调用出来替换原有文本
-    $(".songName").text($.cookie("song_name"));//将cookie存入的歌名调用出来替换原有文本
-    $(".songSinger").text($.cookie("song_singer"));//将cookie存入的歌手调用出来替换原有文本
-    $("title").html($.cookie("song_name")+" / "+$.cookie("song_singer"));//将cookie存入的歌名歌手调用出来替换网页标题
-    $(".song_img").attr({'src':$.cookie("song_photo")});//替换歌曲图片和播放界面的背景图片
+    $("#audio").attr({'src':$.cookie("songLink")});//将cookie存入的播放路径调用出来传给播放标签
+    $(".music_progress_name").text($.cookie("songName")+" / "+$.cookie("songSinger"));//将cookie存入的歌名歌手调用出来替换原有文本
+    $(".songName").text($.cookie("songName"));//将cookie存入的歌名调用出来替换原有文本
+    $(".songSinger").text($.cookie("songSinger"));//将cookie存入的歌手调用出来替换原有文本
+    $("title").html($.cookie("songName")+" / "+$.cookie("songSinger"));//将cookie存入的歌名歌手调用出来替换网页标题
+    $(".song_img").attr({'src':$.cookie("songPhoto")});//替换歌曲图片和播放界面的背景图片
+
 
     //实现播放暂停功能
     var onOff=false;

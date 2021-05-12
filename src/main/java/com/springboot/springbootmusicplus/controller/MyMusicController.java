@@ -53,7 +53,6 @@ public class MyMusicController {
                                                              @RequestParam(required = false) Integer userId) {
 
         log.info("歌曲收藏请求：userId：{}, songId：{}, songName：{}", userId, songId, songName);
-
         // 根据用户Id和歌曲名判断歌曲是否重复收藏
         List<Mymusic> myMusicList = mymusicService.getMymusicInfoBySongNameAndUserId(songName, userId);
         if (CollectionUtils.isNotEmpty(myMusicList)) {
