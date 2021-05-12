@@ -336,18 +336,18 @@
                     }
 
                     function fn(j) {
-                        console.log(data.data.list[j].ml_id);
-                        $.cookie("songLink", data.data.list[j].ml_songLink, {expires: 7, path: "/"});
-                        $.cookie("songName", data.data.list[j].ml_songName, {expires: 7, path: "/"});
-                        $.cookie("songSinger", data.data.list[j].ml_singer, {expires: 7, path: "/"});
-                        $.cookie("songPhoto", data.data.list[j].ml_photoLink, {expires: 7, path: "/"});
+                        console.log(data.data.list[j].mlId);
+                        $.cookie("songLink", data.data.list[j].mlSonglink, {expires: 7, path: "/"});
+                        $.cookie("songName", data.data.list[j].mlSongname, {expires: 7, path: "/"});
+                        $.cookie("songSinger", data.data.list[j].mlSinger, {expires: 7, path: "/"});
+                        $.cookie("songPhoto", data.data.list[j].mlPhotolink, {expires: 7, path: "/"});
                         window.location.href = "/QQmusic.html";
                     }
 
                     function fn1(j) {
-                        console.log(data.data.list[j].ml_id);
-                        $.cookie("songId", data.data.list[j].ml_id, {expires: 7, path: "/"});
-                        $.cookie("songName", data.data.list[j].ml_songName, {expires: 7, path: "/"});
+                        console.log(data.data.list[j].mlId);
+                        $.cookie("songId", data.data.list[j].mlId, {expires: 7, path: "/"});
+                        $.cookie("songName", data.data.list[j].mlSongname, {expires: 7, path: "/"});
                     }
                 }
                 $("table tbody").html(str);
@@ -371,20 +371,21 @@
     function fav(j) {
         $.ajax({
             async: false,
-            url: "/musicLink/addMusicCollect",
+            url: "/myMusic/addMusicCollect",
             type: "post",
             data: {
                 "songName": $.cookie("songName"),
                 "songId": $.cookie("songId"),
                 "user_name": $.cookie("user_name"),
                 "user_password": $.cookie("user_password"),
+                "userId": $.cookie("user_id"),
             },
             success: function (data) {//webspond
                 if (data.code == 200) {
 
                     // $('#sFav'+j).removeClass('glyphicon-heart');
                     $('#sFav' + j).css('color', '#ff69b4');
-                    alert("歌曲收藏成功，请去我的音乐查看");
+                    alert("收藏成功，请去我的音乐查看");
 
 
                     //location.reload();
