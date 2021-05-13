@@ -298,6 +298,7 @@
     });
     $("#user_number").html($.cookie("user_id"));
     function getList(pageNo) {
+        $("table").prop("onclick", null).off("click");
         test
         $.ajax({
             url: "musicLink/getMusicLinkList",
@@ -331,7 +332,6 @@
                                 fav(i);
                             });
                         }
-
                         play1(i);
                     }
 

@@ -9,7 +9,7 @@ function pageTools(curtpage, tpage) {
     var options = {
         bootstrapMajorVersion: 3, //版本
         currentPage: curtpage, //当前页数
-        numberOfPages: 5, //设置显示的页码数
+        numberOfPages: 3, //设置显示的页码数
         totalPages: tpage, //总页数
         alignment: "center", // 居中显示
         itemTexts: function (type, page, current) {
