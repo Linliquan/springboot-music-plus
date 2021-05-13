@@ -293,7 +293,6 @@
 <script type="text/javascript" src="js/vue.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        pageTools(1, 30);//tools里的方法
         getList(1);
     });
     $("#user_number").html($.cookie("user_id"));
@@ -306,7 +305,10 @@
             data: "pageNo=" + pageNo,
             success: function (data) {
                 if (data.code == 200) {
-                    var str = '';
+                    //设置分页数据
+                    pageTools(pageNo, data.data.totalPage);
+                    //初始化
+                    var str = "";
                     for (var i = 0; i < data.data.list.length; i++) {
                         var a = i + 1;
 
