@@ -54,7 +54,7 @@ public class MyMusicController {
 
         log.info("歌曲收藏请求：userId：{}, songId：{}, songName：{}", userId, songId, songName);
         // 根据用户Id和歌曲名判断歌曲是否重复收藏
-        List<Mymusic> myMusicList = mymusicService.getMymusicInfoBySongNameAndUserId(songName, userId);
+        List<Mymusic> myMusicList = mymusicService.getMymusicInfoBySongNameAndUserId(songName, userId != null ? userId : 0);
         if (CollectionUtils.isNotEmpty(myMusicList)) {
             return Response.fail(FailEnums.DATA_DUPLICATION_ERROR.getCode(), "已收藏，请不要重复收藏");
         }
