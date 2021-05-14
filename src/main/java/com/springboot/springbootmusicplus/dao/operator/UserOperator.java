@@ -77,6 +77,9 @@ public class UserOperator extends BaseOperator<UserMapper, User> {
         User user = new User();
         user.setUserPassword(newPassword);
         return userMapper.update(user, wrapper) > 0;
+//        // 回滚测试
+//        userMapper.update(user, wrapper);
+//        throw new RuntimeException();
     }
 
 }

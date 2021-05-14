@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -75,6 +76,7 @@ public class UserController {
     }
 
     @PostMapping("/resetUserPassword")
+    @Transactional(rollbackFor = Exception.class)
     @ApiOperation(value = "修改密码", httpMethod = "POST")
     public Response<UserLoginResModel> resetUserPassword(HttpServletRequest request) {
 
@@ -89,8 +91,10 @@ public class UserController {
             return Response.fail(FailEnums.NOT_EXISTS_ERROR.getCode(), "用户名或旧密码错误！");
         }
         // 修改用户密码
-        boolean updatePassword = userService.updatePassword(userName, newPassword);
-        if (!updatePassword) {
+        try {
+            // 外层使用默认的REQUIRED事务传播，内层使用Propagation.REQUIRES_NEW事务传播，实现内层回滚，外层也可以正常返回响应
+            userService.updatePassword(userName, newPassword);
+        } catch (Exception e) {
             return Response.fail(FailEnums.DB_OPERATOR_ERROR.getCode(), "修改密码失败！");
         }
         log.info("用户名：{} 修改密码成功！, 新密码:{}", userName, newPassword);

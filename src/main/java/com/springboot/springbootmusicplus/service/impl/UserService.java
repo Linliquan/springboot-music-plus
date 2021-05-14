@@ -5,6 +5,8 @@ import com.springboot.springbootmusicplus.entity.User;
 import com.springboot.springbootmusicplus.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -36,6 +38,7 @@ public class UserService implements IUserService {
         return userOperator.getUserInfo(userName, userPassword);
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW , rollbackFor = Exception.class)
     public boolean updatePassword(String userName, String newPassword) {
         return userOperator.updatePassword(userName, newPassword);
     }
