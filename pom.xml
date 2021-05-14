@@ -132,6 +132,12 @@
             </exclusions>
         </dependency>
 
+        <!--使用参数检验，springboot需要导入的依赖，-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

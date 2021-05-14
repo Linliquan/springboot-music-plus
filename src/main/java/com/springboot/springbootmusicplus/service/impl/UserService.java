@@ -38,7 +38,7 @@ public class UserService implements IUserService {
         return userOperator.getUserInfo(userName, userPassword);
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW , rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     public boolean updatePassword(String userName, String newPassword) {
         return userOperator.updatePassword(userName, newPassword);
     }

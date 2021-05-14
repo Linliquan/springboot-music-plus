@@ -76,10 +76,10 @@ public class UserOperator extends BaseOperator<UserMapper, User> {
         wrapper.eq(User::getUserName, userName);
         User user = new User();
         user.setUserPassword(newPassword);
-        return userMapper.update(user, wrapper) > 0;
-//        // 回滚测试
-//        userMapper.update(user, wrapper);
-//        throw new RuntimeException();
+//        return userMapper.update(user, wrapper) > 0;
+        // 回滚测试
+        userMapper.update(user, wrapper);
+        throw new RuntimeException();
     }
 
 }

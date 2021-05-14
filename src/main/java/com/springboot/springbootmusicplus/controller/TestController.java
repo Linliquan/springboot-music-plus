@@ -2,17 +2,23 @@ package com.springboot.springbootmusicplus.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.springboot.springbootmusicplus.common.beantools.Copier;
+import com.springboot.springbootmusicplus.common.enums.FailEnums;
+import com.springboot.springbootmusicplus.common.response.Response;
 import com.springboot.springbootmusicplus.entity.User;
+import com.springboot.springbootmusicplus.hepler.checker.UserRegisterChecker;
+import com.springboot.springbootmusicplus.model.request.SongRearchRequest;
+import com.springboot.springbootmusicplus.model.request.UserRegisterRequest;
 import com.springboot.springbootmusicplus.service.impl.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +35,9 @@ public class TestController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRegisterChecker userRegisterChecker;
 
     @GetMapping("/hello")
     @ApiOperation(value = "打印hello", httpMethod = "GET")
@@ -50,6 +59,25 @@ public class TestController {
         log.info("spring copy Test, cUser: {}", JSON.toJSONString(cUser));
 
         return "Hello world！";
+    }
+
+    @PostMapping("/parameterTest")
+    @Validated
+    @ApiOperation(value = "参数检验测试", httpMethod = "POST")
+    public String parameterTest(@Valid @RequestBody SongRearchRequest request) {
+        log.info("必传 songName: {}", request.getSongName());
+        return request.getSongName();
+    }
+
+    @PostMapping("/checkParameterTest")
+    @ApiOperation(value = "检查参数测试", httpMethod = "POST")
+    public Response<String> checkParameterTest(@RequestBody UserRegisterRequest request) {
+        log.info("必传 userName: {}, userPassword: {}", request.getUserName(), request.getUserPassword());
+        String errorMessage = userRegisterChecker.checkUserRegisterReq(request);
+        if (StringUtils.isNotBlank(errorMessage)) {
+            return Response.fail(FailEnums.PARAM_ERROR.getCode(), errorMessage);
+        }
+        return Response.succ(request.getUserName() + " " + request.getUserPassword());
     }
 
 }
