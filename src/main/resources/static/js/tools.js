@@ -74,6 +74,8 @@ function setPassWord(url, data) {                   //url和data为参数，在�
         data: data,
         success: function (data) {
             if (data.code == 200) {
+                $.cookie("user_name", "1", {expires: 7, path: "/"});        // 调用该方法时将用户名的cookie值重置为1
+                $.cookie("user_id", "", {expires: -1, path: "/"});          // 调用该方法时将用户id的cookie值删除
                 window.location.href = "/index.html";// 跳转到指定页面
                 alert("修改密码成功，请重新登录！"); // 弹窗
             } else {
@@ -135,6 +137,7 @@ function denglu(url, data) {                                                 //u
 *
 * */
 function zhuXiao() {
+    console.log("了哈哈哈");
     $.cookie("user_name", "1", {expires: 7, path: "/"});        // 调用该方法时将用户名的cookie值重置为1
     $.cookie("user_id", "", {expires: -1, path: "/"});          // 调用该方法时将用户id的cookie值删除
 }
