@@ -3,7 +3,7 @@ HELP.md
 /target/
 /**/target/
 /**/resources/rebel.xml
-### IntelliJ IDEA ###
+#### IntelliJ IDEA ####
 .idea
 *.iws
 *.iml
