@@ -23,6 +23,7 @@
  
   * 对原来的springboot-music项目使用springboot重新进行重构，代码更加规范和易懂
   * 加入一线互联网公司各种主流技术，力争和企业接轨
+  * 兼容原springboot-music项目所有功能
   * 修复了原项目榜单分页的bug以及不能根据旧密码修改用户密码的bug
   * 使用mybatis-plus、lombok、fastJson、swagger
   * 使用mybatis-generator自动生成xml、entity、mapper层代码
