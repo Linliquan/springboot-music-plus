@@ -4,7 +4,8 @@
  项目名称：基于SpringBoot+Mybatis+MySQL轻语音乐网-升级版（springboot-music-plus）
 
  运行步骤：
-1. 使用idea导入项目：可以在D盘新建idea_workSpace文件夹，使用git进入到该文件夹下，然后使用"git clone https://github.com/Linliquan/springboot-music-plus.git"命令clone项目。下载完成后,可以用idea选择File > Open > idea_workSpace > springboot-music-plus，点击OK直接打开项目。第一次下载项目依赖一般比较慢，所以maven记得配置好本地仓库和阿里云镜像，配置方法可以百度。如果使用命令下载失败或比较慢，可以直接到gitee上下载压缩包，解压后再导入项目。gitee地址：https://gitee.com/linliquan/springboot-music-plus
+1. 使用idea导入项目：可以在D盘新建idea_workSpace文件夹，使用git进入到该文件夹下，然后使用"git clone https://github.com/Linliquan/springboot-music-plus.git"命令clone项目。下载完成后,可以用idea选择File > Open > idea_workSpace > springboot-music-plus，点击OK直接打开项目。第一次下载项目依赖一般比较慢，所以maven记得配置好本地仓库和阿里云镜像，配置方法可以百度。
+如果使用命令下载失败或比较慢，可以直接到gitee上下载压缩包，解压后再导入项目。gitee地址：https://gitee.com/linliquan/springboot-music-plus 项目使用到lombok技术，所以依赖下载完后idea需要安装lombok插件才可以。
 
 2.用Navicat for mysql建立一个数据库，我建立的数据库名为game,也可以和我不一样。在项目里找到game.sql文件，用记事本或别的编辑器打开，把里面的创建表语句和插入数据语句复制到Navicat for mysql的命令列界面即可快速的建好相对应的表，总共有4个表。或建好game数据库后，右击数据库导入运行game.sql文件也行。
 
