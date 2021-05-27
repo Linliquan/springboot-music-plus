@@ -17,7 +17,7 @@ import java.util.Map;
 
 /**
  * @author linliquan
- * @description:
+ * @description: 统一 Aspect 切面拦截
  * @create 2021/4/13 17:23
  */
 @Aspect

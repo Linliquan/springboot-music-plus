@@ -17,7 +17,7 @@ import java.util.Set;
 
 /**
  * @author linliquan
- * @description:
+ * @description: dubbo参数校验切面拦截
  * @create 2021/4/13 17:20
  */
 @Aspect
