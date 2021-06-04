@@ -90,12 +90,6 @@
             <artifactId>mybatis-plus-annotation</artifactId>
             <version>${mybatis.baomidou.version}</version>
         </dependency>
-        <!--加入extension依赖，解决mybatisPlus和pageHelper依赖冲突问题-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-extension</artifactId>
-            <version>${mybatis.baomidou.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -125,6 +119,17 @@
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>${pagehelper-boot-version}</version>
+            <!--去掉mybatis依赖，解决mybatisPlus和pageHelper依赖冲突问题-->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mybatis</groupId>
+                    <artifactId>mybatis</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mybatis</groupId>
+                    <artifactId>mybatis-spring</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!--使用参数检验，springboot2.3.0需要导入以下依赖，springboot2.3.0版本以下默认已导入-->
