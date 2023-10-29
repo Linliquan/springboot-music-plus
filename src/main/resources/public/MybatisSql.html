@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Mybatis Sql Log</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/sql-formatter/11.0.2/sql-formatter.min.js"></script>
+    <style>
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            height: 100%
+        }
+        .btn_contain {
+            text-align: center;
+            width: 100%
+        }
+        .btn {
+            width: 200px;
+            margin-left: 10px;
+            height: 40px;
+        }
+        .m-toast-pop {
+            display: none;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            overflow: auto;
+            text-align: center;
+        }
+        .m-toast-inner {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 100%;
+            transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .m-toast-inner-text {
+            display: inline-block;
+            margin: 0 22px;
+            padding: 19px 21px;
+            font-size: 16px;
+            color: #FFFFFF;
+            letter-spacing: 0;
+            line-height: 22px;
+            background: rgba(0, 0, 0, 0.72);
+            border-radius: 10px;
+        }
+    </style>
+
+
+    <script type="text/javascript">
+        function $(id) {
+            return document.getElementById(id);
+        }
+        function parsePara(p) {
+            if (p == "null") {
+                return p;
+            }
+            var result;
+            // var m = p.match(/(?:\((.+)\))$/i)[1];
+            var m = p.match(/\(([^\)]+)\)$/)[1];
+            // result = p.replace(/(\(.+\))$/i, "");
+            result = p.replace(`(` + m + `)`, "")
+            switch (m) {
+                case "String":
+                case "Timestamp":
+                    result = "'" + result + "'";
+                    break;
+                case "Integer":
+                    break;
+                case "Date":
+                    result = "STR_TO_DATE('" + result + "','%Y-%m-%d %H:%i:%s')";
+                    break;
+                default:
+                    break;
+            }
+            return result;
+        }
+
+        function parseParas(para) {
+            var ps = [];
+            var p;
+            var result = para.replace(/.*(Parameters[\s]*(?=:)):/, "");
+            // var t = result.match(/(null\,\s)|(.+?\(.+?\)(?=[\s]*\,))|(.+?\(.+?\)$)/g);
+            var t = result.match(/(.+?\(*.+?\)*(?=[\s]*\,))|(.+?\(.+?\)$)/g);
+
+            var len = t.length;
+            if (len > 0) {
+                for (var i = 0; i < len; i++) {
+                    p = t[i].replace(/,$/, "").replace(/^[\,]/, "").replace(/^[\s]*||[\s]*$/, "");
+                    ps.push(parsePara(p));
+                }
+            }
+            return ps;
+        }
+        function parseSql(sql) {
+            var result = sql.replace(/.*(Preparing[\s]*(?=:)):/, "");
+            return result;
+        }
+        function getRealSql(paraMeter, sqlOrg) {
+            try {
+                var realSql = parseSql(paraMeter);
+                var realParas = parseParas(sqlOrg);
+            } catch (error) {
+                alert('参数转换错误！')
+                throw error;
+            }
+            var len = realParas.length;
+            for (var i = 0; i < len; i++) {
+                realSql = realSql.replace("?", realParas[i]);
+
+            }
+            return realSql;
+        }
+
+        function format() {
+            if (event.keyCode == '13') {
+                var sql = $("sql").value;
+                var para = $("para").value;
+                var fomatSql = getRealSql(sql, para);
+                $("result").value = fomatSql;
+            }
+        }
+        function converSql() {
+            var sql = $("sql").value;
+            var para = $("para").value;
+            var fomatSql = getRealSql(sql, para);
+            try { 
+                fomatSql = getFormatSql(fomatSql, "sql");
+            } catch (e) {
+                console.error("SQL美化出错", e);
+            }
+            $("result").value = fomatSql;
+        }
+        function reset() {
+            var sql = $("sql").value = "";
+            var para = $("para").value = "";
+            $("result").value = "";
+        }
+        function copyRes() {
+            var copycode = $("result");
+            copycode.select();
+            document.execCommand("Copy");
+        }
+        function getFormatSql(editorValue, sqlType) {
+            return sqlFormatter.format(editorValue, {
+                language: sqlType
+            });
+        }
+        function selfMinify() {
+            var editorValue = inputACEEditor[_0x485405(0x23b)]();
+            var newValue = editorValue.split("\n").join(" ").replace(/\s+/g, " ");
+            outputACEEditor['setValue'](newValue, 0x1);
+        }
+        function selfBeautifySQL() {
+            var editorValue = inputACEEditor[_0x485405(0x23b)]();
+            var newValue = getFormatSql(editorValue, 'sql');    //n1ql db2
+            outputACEEditor['setValue'](newValue, 0x1);
+        }
+
+        function getSQLSampleData() {
+            inputACEEditor['setValue']('select * from tb where id=123', 0x1);
+        }
+        function displayCenterMessage(a, b) {
+
+            if (a == 'Copied to Clipboard') {
+                a = '复制成功√';
+            }
+
+            if (b == 'success') {
+                Alert.alertSimple(a);
+            } else {
+                Alert.alertSimpleError(a);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <p>
+    <h2>输入SQL log日志 <input type="button" onclick="reset();" value="重置"></input></h2>
+    <textarea id="sql" onkeydown="format()"></textarea>
+    </p>
+    <p>
+    <h2>输入SQL参数</h2>
+    <textarea id="para"></textarea>
+    </p>
+    <div class="btn_contain">
+        <button class="btn" onclick="converSql()" value="转换">转换</button>
+        <button class="btn" onclick="reset();" value="重置">重置</button>
+        <button class="btn" onclick="copyRes();" value="复制结果">复制结果</button>
+    </div>
+    <p>
+    <h2>转换结果:</h2>
+    <textarea id="result" style="border:2px solid rgb(98, 255, 0)"></textarea>
+    </p>
+	<p style="text-align:center"> 本页面由轻语音乐网赞助、提供计算服务。轻语音乐网：<a hidefocus="true" href="http://linliquan.top" target="_blank">http://linliquan.top</a>，
+	github地址：<a hidefocus="true" href="https://github.com/Linliquan/springboot-music-plus" target="_blank"> https://github.com/Linliquan/springboot-music-plus</a> ，欢迎star！</p>
+</body>
+</html>
